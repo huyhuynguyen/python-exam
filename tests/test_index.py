@@ -8,6 +8,7 @@ class TestPlayGame(unittest.TestCase):
     def setUp(self) -> None:
         self.play_game = PlayingGuessGame()
 
+    # mock property to test
     @patch('index.House.card_order', new_callable = PropertyMock, return_value = 20)
     @patch('index.Player.card_order', new_callable = PropertyMock, return_value = 30)
     def test_is_guess_right_greater_true(self, house_card_order, player_card_order):
