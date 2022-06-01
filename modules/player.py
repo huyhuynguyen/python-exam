@@ -15,18 +15,17 @@ class Player(User):
         self._point = point
 
     def player_guess_input(self):
-        string = input('Enter your choice: ')
         count_input = 0
-        while count_input < 3:
+        while True:
+            if count_input == enums.TRY_TIME:
+                raise ValueError(enums.INVALID_INPUT)
+
+            string = input('Enter your choice: ')
             if string not in ['G', 'L']:
-                print('Invalid choice. Please choose again')
-                string = input('Enter your choice: ')
+                count_input += 1
+                print(f'Invalid choice. Please choose again. {enums.TRY_TIME - count_input} times try')
             else:
                 break
-            count_input += 1
-        
-        if count_input == 3:
-            raise ValueError(enums.INVALID_INPUT)
 
         return 'greater' if string == 'G' else 'less'
 
@@ -37,17 +36,17 @@ class Player(User):
         self.point += point_win
 
     def is_continue(self):
-        text = input('Continue to play[y/n]: ')
         count_input = 0
-        while count_input < 3:
+        while True:
+            if count_input == enums.TRY_TIME:
+                raise ValueError(enums.INVALID_INPUT)
+
+            text = input('Continue to play[y/n]: ')
             if text not in ['Y', 'y', 'n', 'N']:
-                text = input('Continue to play[y/n]: ')
+                count_input += 1
+                print(f'Invalid choice. Please choose again. {enums.TRY_TIME - count_input} times try')
             else:
                 break
-            count_input += 1
-        
-        if count_input == 3:
-            raise ValueError(enums.INVALID_INPUT)
 
         return text in ['Y', 'y']
 

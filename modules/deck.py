@@ -14,7 +14,6 @@ class Deck:
     def card_list(self):
         return self.suites_group + self.greatest_card
 
-    # bug: duplicate card when random
     def get_random_card(self, except_card_name = None):
         card_list = self.card_list.copy()
         if except_card_name:
