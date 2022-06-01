@@ -21,3 +21,7 @@ class MyLogger:
         # # file_handler.setLevel(logging.DEBUG)
         # file_handler.setFormatter(self.formatter)
         # self.logger.addHandler(file_handler)
+
+    def print_log_to_file(self, point, result):
+        self.logger.info(f'Player point: {point}')
+        self.logger.info(f'Player {result}')

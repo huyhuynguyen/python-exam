@@ -1,10 +1,2 @@
-2022-05-30 23:11:55,458 - INFO - [in e:\Python\python-exam\index.py:111] Player point: 60
-2022-05-30 23:11:55,459 - INFO - [in e:\Python\python-exam\index.py:118] Player lose
-2022-06-01 09:16:13,932 - INFO - [in d:\python-exam\index.py:111] Player point: 60
-2022-06-01 09:16:13,933 - INFO - [in d:\python-exam\index.py:118] Player lose
-2022-06-01 09:35:58,159 - INFO - [in D:\python-exam\index.py:111] Player point: 20
-2022-06-01 09:35:58,160 - INFO - [in D:\python-exam\index.py:118] Player lose
-2022-06-01 09:39:28,769 - INFO - [in d:\python-exam\index.py:112] Player point: 60
-2022-06-01 09:39:28,769 - INFO - [in d:\python-exam\index.py:119] Player lose
-2022-06-01 09:39:36,606 - INFO - [in d:\python-exam\index.py:112] Player point: 60
-2022-06-01 09:39:36,607 - INFO - [in d:\python-exam\index.py:119] Player lose
+2022-06-01 15:39:04,877 - INFO - [in d:\python-exam\modules\log_mod.py:26] Player point: 50
+2022-06-01 15:39:04,877 - INFO - [in d:\python-exam\modules\log_mod.py:27] Player loses
