@@ -1,6 +1,9 @@
 class User:
     def __init__(self) -> None:
-        self._card = None
+        self._card = {
+            'card': None,
+            'order': None
+        }
 
     @property
     def card(self) -> str:
@@ -9,3 +12,11 @@ class User:
     @card.setter
     def card(self, card): 
         self._card = card
+
+    @property
+    def card_order(self):
+        return self.card['order']
+
+    @property
+    def card_name(self):
+        return self.card['card']

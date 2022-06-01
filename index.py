@@ -1,4 +1,3 @@
-from ast import Raise
 import subprocess
 from time import sleep
 import enums
@@ -22,28 +21,27 @@ class PlayingGuessGame:
 
     def receive_card(self):
         self.house.card = self.deck.get_random_card()
-        self.player.card = self.deck.get_random_card(except_card_name=self.house.card['card'])
+        self.player.card = self.deck.get_random_card(except_card_name=self.house.card_name)
 
         self.house.print_card()
         # print(f'House card: {self.house.card}')
         # print(f'Player card: {self.player.card}')
 
     def is_guess_right(self, guessing):
-        house_card_order = self.house.card['order']
-        player_card_order = self.player.card['order']
+        house_card_order = self.house.card_order
+        player_card_order = self.player.card_order
 
-        return ((guessing == 'greater' and player_card_order > house_card_order) 
-                    or (guessing == 'less' and player_card_order < house_card_order))
+        return ((guessing == enums.GuessText.G.value and player_card_order > house_card_order) \
+                    or (guessing == enums.GuessText.L.value and player_card_order < house_card_order))
 
     def is_auto_break_game(self):
         return self.player.point not in \
                 range(self.point_min_lose, self.point_target+1)
 
     def clear_screen(self):
-        command = ['cls']
-        # clear screen
+        command = enums.CLS_COMMAND_WINDOWS
         try:
-            subprocess.run(command, check = True, shell=True)
+            subprocess.run(command, check = True, shell = True)
         except:
             raise BaseException(f'"{"".join(command)}" command does not exist')
 
@@ -60,7 +58,7 @@ class PlayingGuessGame:
         return guess_choice
 
     def stage3(self, guess_choice):
-        if self.is_guess_right(guessing=guess_choice):
+        if self.is_guess_right(guessing = guess_choice):
             print('You guess right!!!')
             self.player.update_point_guess_right(self.point_win)
 
