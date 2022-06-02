@@ -50,7 +50,7 @@ class Player(User):
 
         return text in ['Y', 'y']
 
-if __name__ == '__main__':
-    p = Player()
-    # p.point = 20
-    print(p.point)
+# if __name__ == '__main__':
+#     p = Player()
+#     # p.point = 20
+#     print(p.point)

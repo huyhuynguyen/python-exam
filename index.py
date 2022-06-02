@@ -24,6 +24,8 @@ class PlayingGuessGame:
         self.player.card = self.deck.get_random_card(except_card_name=self.house.card_name)
 
         self.house.print_card()
+
+        self.deck.remove_existed_cards(*[self.house.card_name, self.player.card_name])
         # print(f'House card: {self.house.card}')
         # print(f'Player card: {self.player.card}')
 
@@ -36,14 +38,15 @@ class PlayingGuessGame:
 
     def is_auto_break_game(self):
         return self.player.point not in \
-                range(self.point_min_lose, self.point_target+1)
+                range(self.point_min_lose, self.point_target+1) \
+                or self.deck.out_of_card()
 
     def clear_screen(self):
         command = enums.CLS_COMMAND_WINDOWS
         try:
-            subprocess.run(command, check = True, shell = True)
+            subprocess.run(command, check=True, shell = True)
         except:
-            raise BaseException(f'"{"".join(command)}" command does not exist')
+            raise TypeError(f'"{"".join(command)}" command does not exist')
 
     def stage1(self):
         self.player.spend_cost_each_round(self.point_cost_each_round)
@@ -104,6 +107,9 @@ class PlayingGuessGame:
 
     def end_game(self):
         print('-------------------- End game --------------------')
+        if self.deck.out_of_card():
+            print('Out of card')
+
         print(f'Player point: {self.player.point}')
         result = 'wins!!' if self.player.point >= self.point_target else 'loses'
         print(f'You {result}')
