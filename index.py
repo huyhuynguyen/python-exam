@@ -21,11 +21,10 @@ class PlayingGuessGame:
 
     def receive_card(self):
         self.house.card = self.deck.get_random_card()
-        self.player.card = self.deck.get_random_card(except_card_name=self.house.card_name)
+        self.player.card = self.deck.get_random_card()
 
         self.house.print_card()
 
-        self.deck.remove_existed_cards(*[self.house.card_name, self.player.card_name])
         # print(f'House card: {self.house.card}')
         # print(f'Player card: {self.player.card}')
 

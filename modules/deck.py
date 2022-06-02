@@ -8,8 +8,13 @@ class Deck:
         self._card_list = self.get_card_list()
 
     def get_card_list(self):
-        return [str(x)+'-'+str(y) for x in self.groups for y in self.suites] \
+        card_list_name = [str(x)+'-'+str(y) for x in self.groups for y in self.suites] \
                 + self.greatest_card
+
+        return [{
+            'card': item,
+            'order': index
+        } for index, item in enumerate(card_list_name)]
 
     @property
     def card_list(self):
@@ -22,27 +27,20 @@ class Deck:
     def out_of_card(self):
         return len(self.card_list) < 2
 
-    def get_random_card(self, except_card_name = None):
-        card_list = self.card_list.copy()
-        if except_card_name:
-            card_list = [card for card in card_list if card != except_card_name]
-        card: str = random.choice(card_list)
-        index: int = card_list.index(card)
-        return {
-            'card': card,
-            'order': index
-        }
-
-    def remove_existed_cards(self, *existed_cards):
-        self.card_list = list(filter(lambda card_item: card_item not in existed_cards, self.card_list))
+    def get_random_card(self):
+        card = random.choice(self.card_list)
+        # remove card after choose
+        self.card_list = [card_item for card_item in self.card_list if card_item != card]
+        return card
 
 # if __name__ == '__main__':
-#     deck = Deck()
-#     for x in range(20):
-#         a = deck.get_random_card()
-#         b = deck.get_random_card(except_card_name=a['card'])
-#         deck.remove_existed_cards(a['card'], b['card'])
+    # deck = Deck()
+    # print(deck.get_random_card())
+    # for x in range(20):
+    #     a = deck.get_random_card()
+    #     b = deck.get_random_card(except_card_name=a['card'])
+    #     deck.remove_existed_cards(a['card'], b['card'])
 
 
-#     print(len(deck.card_list))
+    # print(len(deck.card_list))
 

@@ -46,3 +46,19 @@
 2022-06-02 15:04:21,195 - INFO - [in d:\python-exam\modules\log_mod.py:27] Player loses
 2022-06-02 16:59:21,467 - INFO - [in D:\python-exam\modules\log_mod.py:26] Player point: 80
 2022-06-02 16:59:21,468 - INFO - [in D:\python-exam\modules\log_mod.py:27] Player loses
+2022-06-02 17:27:12,341 - INFO - [in D:\python-exam\modules\log_mod.py:26] Player point: 50
+2022-06-02 17:27:12,341 - INFO - [in D:\python-exam\modules\log_mod.py:27] Player loses
+2022-06-02 17:27:30,331 - INFO - [in D:\python-exam\modules\log_mod.py:26] Player point: 80
+2022-06-02 17:27:30,331 - INFO - [in D:\python-exam\modules\log_mod.py:27] Player loses
+2022-06-02 17:31:52,465 - INFO - [in d:\python-exam\modules\log_mod.py:26] Player point: 90
+2022-06-02 17:31:52,465 - INFO - [in d:\python-exam\modules\log_mod.py:27] Player loses
+2022-06-02 17:53:23,140 - INFO - [in d:\python-exam\modules\log_mod.py:26] Player point: 110
+2022-06-02 17:53:23,141 - INFO - [in d:\python-exam\modules\log_mod.py:27] Player wins!!
+2022-06-02 17:54:04,185 - INFO - [in D:\python-exam\modules\log_mod.py:26] Player point: 70
+2022-06-02 17:54:04,186 - INFO - [in D:\python-exam\modules\log_mod.py:27] Player loses
+2022-06-02 17:56:34,763 - INFO - [in d:\python-exam\modules\log_mod.py:26] Player point: 60
+2022-06-02 17:56:34,764 - INFO - [in d:\python-exam\modules\log_mod.py:27] Player loses
+2022-06-02 18:01:06,571 - INFO - [in d:\python-exam\modules\log_mod.py:26] Player point: 110
+2022-06-02 18:01:06,571 - INFO - [in d:\python-exam\modules\log_mod.py:27] Player wins!!
+2022-06-02 18:01:29,028 - INFO - [in D:\python-exam\modules\log_mod.py:26] Player point: 60
+2022-06-02 18:01:29,029 - INFO - [in D:\python-exam\modules\log_mod.py:27] Player loses
