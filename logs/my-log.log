@@ -44,3 +44,5 @@
 2022-06-02 15:03:51,537 - INFO - [in d:\python-exam\modules\log_mod.py:27] Player wins!!
 2022-06-02 15:04:21,194 - INFO - [in d:\python-exam\modules\log_mod.py:26] Player point: 70
 2022-06-02 15:04:21,195 - INFO - [in d:\python-exam\modules\log_mod.py:27] Player loses
+2022-06-02 16:59:21,467 - INFO - [in D:\python-exam\modules\log_mod.py:26] Player point: 80
+2022-06-02 16:59:21,468 - INFO - [in D:\python-exam\modules\log_mod.py:27] Player loses

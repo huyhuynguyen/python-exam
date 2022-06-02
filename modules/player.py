@@ -5,6 +5,7 @@ import enums
 class Player(User):
     def __init__(self) -> None:
         self._point = 60
+        super().__init__()
 
     @property
     def point(self) -> int:
