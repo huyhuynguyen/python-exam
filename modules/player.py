@@ -1,5 +1,6 @@
 from modules.user import User
 import enums
+import re
 
 
 class Player(User):
@@ -17,12 +18,14 @@ class Player(User):
 
     def player_guess_input(self):
         count_input = 0
+        pattern = re.compile(r"^[g,l]{1,1}", re.IGNORECASE)
         while True:
             if count_input == enums.TRY_TIME:
                 raise ValueError(enums.INVALID_INPUT)
 
             string = input('Enter your choice: ')
-            if string not in ['G', 'L']:
+            # if string not in ['G', 'L', 'g', 'l']:
+            if not re.fullmatch(pattern, string):
                 count_input += 1
                 print(f'Invalid choice. Please choose again. {enums.TRY_TIME - count_input} times try')
             else:
@@ -38,12 +41,14 @@ class Player(User):
 
     def is_continue(self):
         count_input = 0
+        pattern = re.compile(r"^[y,n]{1,1}", re.IGNORECASE)
         while True:
             if count_input == enums.TRY_TIME:
                 raise ValueError(enums.INVALID_INPUT)
 
             text = input('Continue to play[y/n]: ')
-            if text not in ['Y', 'y', 'n', 'N']:
+            # if text not in ['Y', 'y', 'n', 'N']:
+            if not re.fullmatch(pattern, text):
                 count_input += 1
                 print(f'Invalid choice. Please choose again. {enums.TRY_TIME - count_input} times try')
             else:
