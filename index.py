@@ -38,7 +38,7 @@ class PlayingGuessGame:
     def is_auto_break_game(self):
         return self.player.point not in \
                 range(self.point_min_lose, self.point_target+1) \
-                or self.deck.out_of_card()
+                or self.deck.is_out_of_card()
 
     def clear_screen(self):
         command = enums.CLS_COMMAND_WINDOWS
@@ -106,8 +106,7 @@ class PlayingGuessGame:
 
     def end_game(self):
         print('-------------------- End game --------------------')
-        if self.deck.out_of_card():
-            print('Out of card')
+        self.deck.is_out_of_card()
 
         print(f'Player point: {self.player.point}')
         result = 'wins!!' if self.player.point >= self.point_target else 'loses'

@@ -24,8 +24,11 @@ class Deck:
     def card_list(self, new_card_list):
         self._card_list = new_card_list
 
-    def out_of_card(self):
-        return len(self.card_list) < 2
+    def is_out_of_card(self):
+        if len(self.card_list) < 2:
+            print("Out of card")
+            return True
+        return False
 
     def get_random_card(self):
         card = random.choice(self.card_list)

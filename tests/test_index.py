@@ -81,6 +81,11 @@ class TestPlayGame(unittest.TestCase):
         with patch('index.MyLogger.print_log_to_file') as mock_object:
             self.play_game.end_game()
             mock_object.assert_called()
+
+    def test_end_game_check_out_of_card_called(self):
+        with patch('index.Deck.is_out_of_card') as mock_object:
+            self.play_game.end_game()
+            mock_object.assert_called()
     
 
 if __name__ == '__main__':
