@@ -13,7 +13,7 @@ class PlayingGuessGame:
         self.player = Player()
         self.house = House()
         self.deck = Deck()
-        self.my_logger = MyLogger()
+        # self.my_logger = MyLogger()
         self.point_target = 100
         self.point_cost_each_round = 10
         self.point_win = 20
@@ -71,7 +71,7 @@ class PlayingGuessGame:
 
     def start_game(self):
         # start log
-        self.my_logger.config_log_to_file()
+        MyLogger().config_log_to_file(filename='my-log')
 
         while True:
             # clear screen
@@ -111,7 +111,7 @@ class PlayingGuessGame:
         print(f'Player point: {self.player.point}')
         result = 'wins!!' if self.player.point >= self.point_target else 'loses'
         print(f'You {result}')
-        self.my_logger.print_log_to_file(self.player.point, result)
+        MyLogger().print_log_to_file(self.player.point, result)
 
 
 if __name__ == '__main__':

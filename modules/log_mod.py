@@ -1,18 +1,19 @@
 import logging
-from logging import FileHandler, Formatter
+from logging import FileHandler, Formatter, StreamHandler
 from logging.handlers import RotatingFileHandler
 import os
+from modules.singleton import Singleton
 
 log_file_path = os.path.join(os.path.dirname(__file__), os.pardir, 'logs')
 
-class MyLogger:
+class MyLogger(metaclass = Singleton):
     def __init__(self) -> None:
         self.logger = logging.getLogger('Player log')
         self.logger.setLevel(logging.DEBUG)
         self.formatter = Formatter('%(asctime)s - %(levelname)s - [in %(pathname)s:%(lineno)d] %(message)s')
 
-    def config_log_to_file(self):
-        file_handler = FileHandler(filename=f'{log_file_path}/my-log.log')
+    def config_log_to_file(self, filename):
+        file_handler = FileHandler(filename=f'{log_file_path}/{filename}.log')
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(self.formatter)
         self.logger.addHandler(file_handler)
@@ -21,6 +22,12 @@ class MyLogger:
         # # file_handler.setLevel(logging.DEBUG)
         # file_handler.setFormatter(self.formatter)
         # self.logger.addHandler(file_handler)
+
+    def config_stream_log(self):
+        stream_handler = StreamHandler()
+        stream_handler.setLevel(logging.DEBUG)
+        stream_handler.setFormatter(self.formatter)
+        self.logger.addHandler(stream_handler)
 
     def print_log_to_file(self, point, result):
         self.logger.info(f'Player point: {point}')
