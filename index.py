@@ -1,4 +1,3 @@
-import subprocess
 from time import sleep
 import enums
 import modules
@@ -7,6 +6,7 @@ from modules.deck import Deck
 from modules.house import House
 from modules.log_mod import MyLogger
 from modules.player import Player
+from helpers.clear_screen import clear_screen as clscreen
 
 class PlayingGuessGame:
     def __init__(self) -> None:
@@ -40,13 +40,6 @@ class PlayingGuessGame:
                 range(self.point_min_lose, self.point_target+1) \
                 or self.deck.is_out_of_card()
 
-    def clear_screen(self):
-        command = enums.CLS_COMMAND_WINDOWS
-        try:
-            subprocess.run(command, check=True, shell = True)
-        except:
-            raise TypeError(f'"{"".join(command)}" command does not exist')
-
     def stage1(self):
         self.player.spend_cost_each_round(self.point_cost_each_round)
         print(f'Player point: {self.player.point}')
@@ -75,7 +68,7 @@ class PlayingGuessGame:
 
         while True:
             # clear screen
-            self.clear_screen()
+            clscreen()
 
             print('-------------------- Start new round --------------------')
             self.stage1()
@@ -100,7 +93,7 @@ class PlayingGuessGame:
                 
             sleep(enums.TIME_SLEEP)
         
-        self.clear_screen()
+        clscreen()
         # End game
         self.end_game()
 

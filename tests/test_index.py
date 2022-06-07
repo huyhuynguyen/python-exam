@@ -42,19 +42,6 @@ class TestPlayGame(unittest.TestCase):
         res = self.play_game.is_auto_break_game()
         self.assertFalse(res)
 
-    @patch('index.enums.CLS_COMMAND_WINDOWS', new_callable = PropertyMock, return_value = ['clss'])
-    def test_is_clear_screen_fail_raise_exception(self, command):
-        with self.assertRaises(Exception) as context:
-            self.play_game.clear_screen()
-        
-        self.assertIs(type(context.exception), TypeError)
-
-    def test_is_clear_screen_called(self):
-        with patch('index.subprocess.run') as mock_object:
-            self.play_game.clear_screen()
-            mock_object.assert_called()
-            mock_object.assert_called_with(['cls'], check=True, shell=True)
-
     def test_stage1_subtract_point_called(self):
         with patch('index.Player.spend_cost_each_round') as sub_point_mock, \
             patch('index.PlayingGuessGame.receive_card') as receive_mock:
