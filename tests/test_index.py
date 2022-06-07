@@ -68,13 +68,17 @@ class TestPlayGame(unittest.TestCase):
             mock_object.assert_called()
 
     @patch('index.PlayingGuessGame.is_guess_right', return_value = True)
-    def test_stage_3_true(self, guess_right):
-        res = self.play_game.stage3('abc')
+    def test_stage_3_true(self, guess_right, ):
+        with patch('index.Player.update_point_guess_right') as mock_object:
+            res = self.play_game.stage3('abc')
+            mock_object.assert_called()
         self.assertTrue(res)
 
     @patch('index.PlayingGuessGame.is_guess_right', return_value = False)
     def test_stage_3_false(self, guess_wrong):
-        res = self.play_game.stage3('abc')
+        with patch('index.Player.update_point_guess_right') as mock_object:
+            res = self.play_game.stage3('abc')
+            mock_object.assert_not_called()
         self.assertFalse(res)
 
     def test_end_game_log_called(self):
