@@ -1,6 +1,6 @@
+import logging
 import unittest
 
-from charset_normalizer import logging
 import setup_path
 from modules import MyLogger
 import subprocess
