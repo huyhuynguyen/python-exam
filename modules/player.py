@@ -22,7 +22,9 @@ class Player(User):
     
     def player_guess_input(self):
         string = is_valid_input(pattern = r"^[g,l]{1,1}", label = 'Enter your choice: ')
-        return 'greater' if string == 'G' else 'less'
+        if string == ValueError:
+            return ValueError
+        return 'greater' if string in ['G', 'g'] else 'less'
 
     @is_valid_point
     def spend_cost_each_round(self, point_cost):
@@ -34,4 +36,6 @@ class Player(User):
 
     def is_continue(self):
         text = is_valid_input(pattern = r"^[y,n]{1,1}", label = 'Continue to play[y/n]: ')
+        if text == ValueError:
+            return ValueError
         return text in ['Y', 'y']

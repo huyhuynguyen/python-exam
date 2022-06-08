@@ -33,13 +33,11 @@ class Deck:
         self.card_list = [card_item for card_item in self.card_list if card_item != card]
         return card
 
-# if __name__ == '__main__':
-#     deck = Deck()
-#     print(type(deck.get_random_card()))
-    # for x in range(20):
-    #     a = deck.get_random_card()
-    #     b = deck.get_random_card(except_card_name=a['card'])
-    #     deck.remove_existed_cards(a['card'], b['card'])
-
-
-    # print(len(deck.card_list))
+if __name__ == '__main__':
+    deck = Deck()
+    print(deck.card_list)
+    print("\u2764\uFE0F")
+    print("Spades -> \u2660")
+    print("Club -> \u2663")
+    print("Diamond -> \u2666")
+    print("Heart -> \u2665")
