@@ -1,6 +1,5 @@
 from modules.user import User
-import enums
-import re
+from helpers.is_valid_input import is_valid_input
 
 
 class Player(User):
@@ -15,22 +14,10 @@ class Player(User):
     @point.setter
     def point(self, point):
         self._point = point
-
+        
+    
     def player_guess_input(self):
-        count_input = 0
-        pattern = re.compile(r"^[g,l]{1,1}", re.IGNORECASE)
-        while True:
-            if count_input == enums.TRY_TIME:
-                raise ValueError(enums.INVALID_INPUT)
-
-            string = input('Enter your choice: ')
-            # if string not in ['G', 'L', 'g', 'l']:
-            if not re.fullmatch(pattern, string):
-                count_input += 1
-                print(f'Invalid choice. Please choose again. {enums.TRY_TIME - count_input} times try')
-            else:
-                break
-
+        string = is_valid_input(pattern = r"^[g,l]{1,1}", label = 'Enter your choice: ')
         return 'greater' if string == 'G' else 'less'
 
     def spend_cost_each_round(self, point_cost):
@@ -40,23 +27,10 @@ class Player(User):
         self.point += point_win
 
     def is_continue(self):
-        count_input = 0
-        pattern = re.compile(r"^[y,n]{1,1}", re.IGNORECASE)
-        while True:
-            if count_input == enums.TRY_TIME:
-                raise ValueError(enums.INVALID_INPUT)
-
-            text = input('Continue to play[y/n]: ')
-            # if text not in ['Y', 'y', 'n', 'N']:
-            if not re.fullmatch(pattern, text):
-                count_input += 1
-                print(f'Invalid choice. Please choose again. {enums.TRY_TIME - count_input} times try')
-            else:
-                break
-
+        text = is_valid_input(pattern = r"^[y,n]{1,1}", label = 'Continue to play[y/n]: ')
         return text in ['Y', 'y']
 
 # if __name__ == '__main__':
 #     p = Player()
 #     # p.point = 20
-#     print(p.point)
+#     print(p.player_guess_input())
