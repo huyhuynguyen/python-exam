@@ -30,5 +30,5 @@ class MyLogger(metaclass = Singleton):
         self.logger.addHandler(stream_handler)
 
     def print_log_to_file(self, point, result):
-        self.logger.info(f'Player point: {point}')
+        self.logger.info(f'Player point: {point} {self}')
         self.logger.info(f'Player {result}')

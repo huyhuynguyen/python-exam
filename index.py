@@ -75,6 +75,8 @@ class PlayingGuessGame:
             if self.is_auto_break_game():
                 break
 
+            MyLogger().print_log_to_file(self.player.point, result='running')
+
             # player choices
             print(''' 
                 Your card is greater or less than house card? Choose one option:

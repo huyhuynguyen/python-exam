@@ -13,9 +13,10 @@ class TestClearScreen(unittest.TestCase):
 
     @patch('helpers.clear_screen.enums.CLS_COMMAND_WINDOWS', new_callable = PropertyMock, return_value = ['clssss'])
     def test_is_clear_screen_failed(self, command_clear):
-        with self.assertRaises(Exception) as context:
+        with self.assertRaises(OSError) as context:
             clscreen()
-        self.assertIs(type(context.exception), TypeError)
+            self.assertIs(type(context.exception), TypeError)
+            # using side_effect
 
 
 if __name__ == '__main__':
