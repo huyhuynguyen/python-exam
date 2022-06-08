@@ -1,5 +1,6 @@
 from modules.user import User
 from helpers.is_valid_input import is_valid_input
+from helpers.is_valid_point import is_valid_point
 
 
 class Player(User):
@@ -20,9 +21,11 @@ class Player(User):
         string = is_valid_input(pattern = r"^[g,l]{1,1}", label = 'Enter your choice: ')
         return 'greater' if string == 'G' else 'less'
 
+    @is_valid_point
     def spend_cost_each_round(self, point_cost):
         self.point -= point_cost
 
+    @is_valid_point
     def update_point_guess_right(self, point_win):
         self.point += point_win
 
