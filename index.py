@@ -25,9 +25,6 @@ class PlayingGuessGame:
 
         self.house.print_card()
 
-        # print(f'House card: {self.house.card}')
-        # print(f'Player card: {self.player.card}')
-
     def is_guess_right(self, guessing):
         house_card_order = self.house.card_order
         player_card_order = self.player.card_order
@@ -37,8 +34,7 @@ class PlayingGuessGame:
 
     def is_auto_break_game(self):
         return self.player.point not in \
-                range(self.point_min_lose, self.point_target+1) \
-                or self.deck.is_out_of_card()
+                range(self.point_min_lose, self.point_target+1)
 
     def stage1(self):
         self.player.spend_cost_each_round(self.point_cost_each_round)
@@ -71,11 +67,11 @@ class PlayingGuessGame:
             clscreen()
 
             print('-------------------- Start new round --------------------')
+            if self.deck.is_out_of_card(): 
+                break
             self.stage1()
             if self.is_auto_break_game():
                 break
-
-            MyLogger().print_log_to_file(self.player.point, result='running')
 
             # player choices
             print(''' 
@@ -87,6 +83,7 @@ class PlayingGuessGame:
             guess_choice = self.stage2()
 
             is_player_choose = self.stage3(guess_choice)
+            self.player.print_card()
             if (is_player_choose):
                 # decide continue or stop | point > target
                 if (not self.player.is_continue()) \
@@ -101,7 +98,8 @@ class PlayingGuessGame:
 
     def end_game(self):
         print('-------------------- End game --------------------')
-        self.deck.is_out_of_card()
+        if self.deck.is_out_of_card():
+            print('Out of card')
 
         print(f'Player point: {self.player.point}')
         result = 'wins!!' if self.player.point >= self.point_target else 'loses'

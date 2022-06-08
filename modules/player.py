@@ -15,6 +15,9 @@ class Player(User):
     @point.setter
     def point(self, point):
         self._point = point
+
+    def print_card(self):
+        print(f'Player card: {self.card_name}')
         
     
     def player_guess_input(self):
@@ -32,8 +35,3 @@ class Player(User):
     def is_continue(self):
         text = is_valid_input(pattern = r"^[y,n]{1,1}", label = 'Continue to play[y/n]: ')
         return text in ['Y', 'y']
-
-# if __name__ == '__main__':
-#     p = Player()
-#     # p.point = 20
-#     print(p.player_guess_input())

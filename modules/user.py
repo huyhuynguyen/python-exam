@@ -20,3 +20,7 @@ class User:
     @property
     def card_name(self):
         return self.card['card']
+
+    def print_card(self):
+        # implement in child class
+        pass

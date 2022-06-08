@@ -1,14 +1,6 @@
-2022-06-08 11:54:48,413 - INFO - [in E:\Python\python-exam\modules\log_mod.py:33] Player point: 50 <modules.log_mod.MyLogger object at 0x0000027B3F287610>
-2022-06-08 11:54:48,413 - INFO - [in E:\Python\python-exam\modules\log_mod.py:34] Player running
-2022-06-08 11:55:00,557 - INFO - [in E:\Python\python-exam\modules\log_mod.py:33] Player point: 40 <modules.log_mod.MyLogger object at 0x0000027B3F287610>
-2022-06-08 11:55:00,557 - INFO - [in E:\Python\python-exam\modules\log_mod.py:34] Player running
-2022-06-08 11:55:02,713 - INFO - [in E:\Python\python-exam\modules\log_mod.py:33] Player point: 30 <modules.log_mod.MyLogger object at 0x0000027B3F287610>
-2022-06-08 11:55:02,713 - INFO - [in E:\Python\python-exam\modules\log_mod.py:34] Player running
-2022-06-08 11:55:06,154 - INFO - [in E:\Python\python-exam\modules\log_mod.py:33] Player point: 40 <modules.log_mod.MyLogger object at 0x0000027B3F287610>
-2022-06-08 11:55:06,154 - INFO - [in E:\Python\python-exam\modules\log_mod.py:34] Player running
-2022-06-08 11:55:10,636 - INFO - [in E:\Python\python-exam\modules\log_mod.py:33] Player point: 50 <modules.log_mod.MyLogger object at 0x0000027B3F287610>
-2022-06-08 11:55:10,636 - INFO - [in E:\Python\python-exam\modules\log_mod.py:34] Player running
-2022-06-08 11:55:15,746 - INFO - [in E:\Python\python-exam\modules\log_mod.py:33] Player point: 60 <modules.log_mod.MyLogger object at 0x0000027B3F287610>
-2022-06-08 11:55:15,747 - INFO - [in E:\Python\python-exam\modules\log_mod.py:34] Player running
-2022-06-08 11:55:19,477 - INFO - [in E:\Python\python-exam\modules\log_mod.py:33] Player point: 80 <modules.log_mod.MyLogger object at 0x0000027B3F287610>
-2022-06-08 11:55:19,477 - INFO - [in E:\Python\python-exam\modules\log_mod.py:34] Player loses
+2022/06/08 15:07:53 - INFO - [in e:\Python\python-exam\modules\log_mod.py:33] Player point: 70
+2022/06/08 15:07:53 - INFO - [in e:\Python\python-exam\modules\log_mod.py:34] Player loses
+2022/06/08 15:08:57 - INFO - [in e:\Python\python-exam\modules\log_mod.py:33] Player point: 110
+2022/06/08 15:08:57 - INFO - [in e:\Python\python-exam\modules\log_mod.py:34] Player wins!!
+2022/06/08 15:12:45 - INFO - [in e:\Python\python-exam\modules\log_mod.py:33] Player point: 50
+2022/06/08 15:12:45 - INFO - [in e:\Python\python-exam\modules\log_mod.py:34] Player loses
