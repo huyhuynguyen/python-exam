@@ -2,6 +2,8 @@ from time import sleep
 import enums
 import modules
 import os
+import sys
+import time
 import subprocess
 from modules.deck import Deck
 from modules.house import House
@@ -9,6 +11,14 @@ from modules.log_mod import MyLogger
 from modules.player import Player
 from helpers.clear_screen import clear_screen as clscreen
 
+
+start_banner = "Welcome to guessing game"
+logging_filename = 'my-log'
+game_question = ''' 
+                Your card is greater or less than house card? Choose one option:
+                G (greater)
+                L (less)
+            '''
 class PlayingGuessGame:
     def __init__(self) -> None:
         self.player = Player()
@@ -35,6 +45,18 @@ class PlayingGuessGame:
     def is_auto_break_game(self):
         return self.player.point not in \
                 range(self.point_min_lose, self.point_target+1)
+    
+    def start_game_banner(self):
+        for index, character in enumerate(start_banner):
+            if index == len(start_banner) - 1:
+                print(character, end='\n')
+            else:
+                sys.stdout.write(character)
+                sys.stdout.flush()
+            time.sleep(enums.TEXT_RUNNING)
+
+        print("Start game")
+        sleep(enums.WAITING_NEXT_ROUND)
 
     def stage1(self):
         self.player.spend_cost_each_round(self.point_cost_each_round)
@@ -60,6 +82,9 @@ class PlayingGuessGame:
         return False
 
     def start_game(self):
+        # Start game banner
+        self.start_game_banner()
+
         while True:
             # clear screen
             run_command = clscreen()
@@ -74,11 +99,7 @@ class PlayingGuessGame:
                 break
 
             # player choices
-            print(''' 
-                Your card is greater or less than house card? Choose one option:
-                G (greater)
-                L (less)
-            ''')
+            print(game_question)
 
             guess_choice = self.stage2()
             if guess_choice == ValueError:
@@ -97,9 +118,15 @@ class PlayingGuessGame:
                 if flag == ValueError:
                     self.end_game_when_type_wrong()
             else:
-                sleep(enums.TIME_SLEEP)
-                
-            sleep(enums.TIME_SLEEP)
+                # print 3 2 1 .... -> next round
+                for second in range(3):
+                    print(f'Waiting ... {3-second}', end='\r') # cursor at start line
+                    sleep(enums.WAITING_TIME_LOSE)
+                else:
+                    sys.stdout.write("\033[K") # clear line
+                    print('Next round')
+
+            sleep(enums.WAITING_NEXT_ROUND)
         
         # clear screen
         run_command = clscreen()
@@ -121,7 +148,7 @@ class PlayingGuessGame:
         print(f'Player point: {self.player.point}')
         result = 'wins!!' if self.player.point >= self.point_target else 'loses'
         print(f'You {result}')
-        MyLogger().print_log_to_file(self.player.point, result, filename='my-log')
+        MyLogger().print_log_to_file(self.player.point, result, filename=logging_filename)
 
 
 if __name__ == '__main__':

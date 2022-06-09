@@ -30,5 +30,5 @@ class Deck:
     def get_random_card(self):
         card = random.choice(self.card_list)
         # remove card after choose
-        self.card_list = [card_item for card_item in self.card_list if card_item != card]
+        self.card_list.remove(card)
         return card
