@@ -93,7 +93,12 @@ class PlayingGuessGame:
 
             print('-------------------- Start new round --------------------')
             if self.deck.is_out_of_card(): 
-                break
+                print('Out of card')
+                print('Start again')
+                self.deck = Deck()
+                sleep(enums.WAITING_NEXT_ROUND)
+                continue
+            
             self.stage1()
             if self.is_auto_break_game():
                 break
@@ -142,9 +147,6 @@ class PlayingGuessGame:
 
     def end_game(self):
         print('-------------------- End game --------------------')
-        if self.deck.is_out_of_card():
-            print('Out of card')
-
         print(f'Player point: {self.player.point}')
         result = 'wins!!' if self.player.point >= self.point_target else 'loses'
         print(f'You {result}')
