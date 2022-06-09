@@ -20,7 +20,6 @@ class TestValidPoint(unittest.TestCase):
             return 2
         res = a(self, 2)
         self.assertEqual(res, 2)
-       
         
 
 if __name__ == '__main__':

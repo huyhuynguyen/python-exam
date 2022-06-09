@@ -27,11 +27,6 @@ class TestPlayerGuess(unittest.TestCase):
         res = self.player.player_guess_input()
         self.assertIs(res, string_mock.return_value)
 
-    @patch('builtins.input', return_value = 'y')
-    def test_player_continue_1(self, input):
-        res = self.player.is_continue()
-        self.assertTrue(res)
-
     @patch('builtins.input', return_value = 'Y')
     def test_player_continue_2(self, input):
         res = self.player.is_continue()
@@ -39,11 +34,6 @@ class TestPlayerGuess(unittest.TestCase):
 
     @patch('builtins.input', return_value = 'n')
     def test_player_stop_1(self, input):
-        res = self.player.is_continue()
-        self.assertFalse(res)
-
-    @patch('builtins.input', return_value = 'N')
-    def test_player_stop_2(self, input):
         res = self.player.is_continue()
         self.assertFalse(res)
 

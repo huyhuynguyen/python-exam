@@ -10,11 +10,14 @@ class TestLog(unittest.TestCase):
     def setUp(self) -> None:
         self.my_log = MyLogger()
 
-    # def test_call_filehandler_level(self):
-    #     with patch('logging.FileHandler.setLevel') as mock_setLevel:
-    #         self.my_log.config_log_to_file('abc')
-    #         mock_setLevel.assert_called()
-    #         mock_setLevel.assert_called_with(logging.INFO)
+    def test_call_filehandler_level(self):
+        with patch('logging.Logger.addHandler') as mock_add_handler:
+            with patch('logging.FileHandler.setLevel') as mock_setLevel:
+                self.my_log.config_log_to_file('abc')
+                mock_setLevel.assert_called()
+                mock_setLevel.assert_called_with(logging.INFO)
+            mock_add_handler.assert_called_once()
+            
 
     @patch('modules.MyLogger.config_log_to_file')
     def test_write_log_to_file(self, config_log_file):
