@@ -1,8 +1,10 @@
+from io import StringIO
 import setup_path
 import unittest
-from unittest.mock import PropertyMock, patch
+from unittest.mock import patch
 from helpers.clear_screen import clear_screen as clscreen
 import subprocess
+import sys
 
 class TestClearScreen(unittest.TestCase):
     def test_is_clear_screen_called(self):
@@ -11,12 +13,12 @@ class TestClearScreen(unittest.TestCase):
             mock_object.assert_called()
             mock_object.assert_called_with(['cls'], check=True, shell=True)
 
-    @patch('helpers.clear_screen.enums.CLS_COMMAND_WINDOWS', new_callable = PropertyMock, return_value = ['clssss'])
-    def test_is_clear_screen_failed(self, command_clear):
-        with self.assertRaises(OSError) as context:
+    def test_is_clear_screen_failed_print(self):
+        with patch('helpers.clear_screen.subprocess.run', side_effect = subprocess.SubprocessError):
+            capturedOutput = StringIO()
+            sys.stdout = capturedOutput
             clscreen()
-            self.assertIs(type(context.exception), TypeError)
-            # using side_effect
+            self.assertEqual(capturedOutput.getvalue(), "Command not found\n")
 
 
 if __name__ == '__main__':

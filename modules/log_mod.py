@@ -12,7 +12,7 @@ class MyLogger(metaclass = Singleton):
         self.logger.setLevel(logging.DEBUG)
         self.formatter = Formatter('%(asctime)s - %(levelname)s - [in %(pathname)s:%(lineno)d] %(message)s', datefmt="%Y/%m/%d %H:%M:%S")
 
-    def __config_log_to_file(self, filename):
+    def config_log_to_file(self, filename):
         file_handler = FileHandler(filename=f'{log_file_path}/{filename}.log')
         file_handler.setLevel(logging.INFO)
         file_handler.setFormatter(self.formatter)
@@ -23,17 +23,17 @@ class MyLogger(metaclass = Singleton):
         # file_handler.setFormatter(self.formatter)
         # self.logger.addHandler(file_handler)
 
-    def __config_stream_log(self):
+    def config_stream_log(self):
         stream_handler = StreamHandler()
         stream_handler.setLevel(logging.ERROR)
         stream_handler.setFormatter(self.formatter)
         self.logger.addHandler(stream_handler)
 
     def print_log_to_file(self, point, result, filename):
-        self.__config_log_to_file(filename)
+        self.config_log_to_file(filename)
         self.logger.info(f'Player point: {point}')
         self.logger.info(f'Player {result}')
 
     def print_log_wrong_option_console(self, message):
-        self.__config_stream_log()
+        self.config_stream_log()
         self.logger.error(message)

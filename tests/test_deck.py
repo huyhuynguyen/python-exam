@@ -1,10 +1,7 @@
-from io import StringIO
 import unittest
 from unittest.mock import PropertyMock, patch
-
-from pyparsing import sys
 import setup_path
-from modules.deck import Deck
+from modules import Deck
 import subprocess
 
 class TestDeck(unittest.TestCase):
@@ -15,13 +12,9 @@ class TestDeck(unittest.TestCase):
         res = self.deck.get_random_card()
         self.assertNotIn(res['card'], self.deck.card_list)
 
-    @patch.object(Deck, 'card_list', new_callable = PropertyMock, return_value = [])
-    def test_print_if_out_card(self, card_list_mock):
-        capturedOutput = StringIO()
-        sys.stdout = capturedOutput
-        self.deck.is_out_of_card()
-        sys.stdout = sys.__stdout__
-        self.assertEqual(capturedOutput.getvalue(), "Out of card\n")
+    @patch('modules.Deck.card_list', new_callable = PropertyMock, return_value = [])
+    def test_out_of_card_True(self, card_list_mock):
+        self.assertTrue(self.deck.is_out_of_card())
 
 
 if __name__ == '__main__':

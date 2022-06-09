@@ -47,6 +47,8 @@ class PlayingGuessGame:
                 range(self.point_min_lose, self.point_target+1)
     
     def start_game_banner(self):
+        # clear screen
+        clscreen()
         for index, character in enumerate(start_banner):
             if index == len(start_banner) - 1:
                 print(character, end='\n')
@@ -87,13 +89,11 @@ class PlayingGuessGame:
 
         while True:
             # clear screen
-            run_command = clscreen()
-            if (isinstance(run_command, subprocess.CalledProcessError)):
-                print(run_command.stdout)
+            clscreen()
 
             print('-------------------- Start new round --------------------')
             if self.deck.is_out_of_card(): 
-                print('Out of card')
+                print('Out of card!!!')
                 print('Start again')
                 self.deck = Deck()
                 sleep(enums.WAITING_NEXT_ROUND)
@@ -110,9 +110,9 @@ class PlayingGuessGame:
             if guess_choice == ValueError:
                 self.end_game_when_type_wrong()
 
-            is_player_choose = self.stage3(guess_choice)
+            is_player_choose_right = self.stage3(guess_choice)
             self.player.print_card()
-            if (is_player_choose):
+            if (is_player_choose_right):
                 flag = self.player.is_continue()
 
                 # decide continue or stop | point > target
@@ -134,9 +134,7 @@ class PlayingGuessGame:
             sleep(enums.WAITING_NEXT_ROUND)
         
         # clear screen
-        run_command = clscreen()
-        if (isinstance(run_command, subprocess.CalledProcessError)):
-            print(run_command.stdout)
+        clscreen()
         # End game
         self.end_game()
 

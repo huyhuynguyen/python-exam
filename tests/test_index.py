@@ -13,7 +13,7 @@ class TestPlayGame(unittest.TestCase):
             self.play_game.receive_card()
             mock_object.assert_called()
 
-    # mock property to test
+    # # mock property to test
     @patch('index.House.card_order', new_callable = PropertyMock, return_value = 20)
     @patch('index.Player.card_order', new_callable = PropertyMock, return_value = 30)
     def test_is_guess_right_greater_true(self, house_card_order, player_card_order):
@@ -68,16 +68,25 @@ class TestPlayGame(unittest.TestCase):
             mock_object.assert_not_called()
         self.assertFalse(res)
 
-    def test_end_game_log_called(self):
+    @patch('builtins.exit')
+    def test_end_game_log_stream_called_when_type_wrong(self, exit_mock):
+        with patch('index.MyLogger.print_log_wrong_option_console') as mock_object:
+            self.play_game.end_game_when_type_wrong()
+            mock_object.assert_called()
+    
+    def test_end_game_log_file_called(self):
         with patch('index.MyLogger.print_log_to_file') as mock_object:
             self.play_game.end_game()
             mock_object.assert_called()
 
-    def test_end_game_check_out_of_card_called(self):
-        with patch('index.Deck.is_out_of_card') as mock_object:
-            self.play_game.end_game()
-            mock_object.assert_called()
-    
+    @patch('index.Player.player_guess_input')
+    @patch('index.PlayingGuessGame.start_game_banner')
+    def test_is_continue_called_when_guess_right(self, mock_start_banner, mock_guess_input):
+        with patch('index.PlayingGuessGame.is_guess_right', return_value = True) as mock_is_guess_right:
+            with patch('index.Player.is_continue', return_value = False) as mock_is_continue:
+                self.play_game.start_game()
+                mock_is_continue.assert_called()
+
 
 if __name__ == '__main__':
     subprocess.run(['pytest', '-v', r'tests/test_index.py'], shell = True)
