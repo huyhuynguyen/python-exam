@@ -19,13 +19,32 @@ import time
 
 
 
-text = "Welcome to guessing game"
-for index, character in enumerate(text):
-    if index == len(text) - 1:
-        print(character, end='\n')
-    else:
-        sys.stdout.write(character)
-        # sys.stdout.flush()
-    time.sleep(0.2)
+# text = "Welcome to guessing game"
+# for index, character in enumerate(text):
+#     if index == len(text) - 1:
+#         print(character, end='\n')
+#     else:
+#         sys.stdout.write(character)
+#         # sys.stdout.flush()
+#     time.sleep(0.2)
 
-print("Start game")
+# print("Start game")
+
+class MyClass:
+    __instance = None
+
+    def __new__(cls, *args, **kwds):
+        print('new')
+        if not cls.__instance:
+            cls.__instance = object.__new__(cls)
+        return cls.__instance
+        
+
+    def __init__(self) -> None:
+        print('init')
+        pass
+
+a = MyClass()
+# b = MyClass()
+# print(id(a))
+# print(id(b))

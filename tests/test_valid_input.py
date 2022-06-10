@@ -3,6 +3,7 @@ import sys
 import unittest
 import subprocess
 from unittest.mock import PropertyMock, patch
+from modules.not_valid_choice import NotValidChoice
 import setup_path
 from helpers.is_valid_input import is_valid_input
 
@@ -22,7 +23,7 @@ class TestValidInput(unittest.TestCase):
         sys.stdout = capturedOutput
         res = is_valid_input('abc', 'abc')
         self.assertIn("Invalid option\n", capturedOutput.getvalue())
-        self.assertIs(res, ValueError)
+        self.assertIs(res, NotValidChoice)
 
 if __name__ == '__main__':
     subprocess.run(['pytest', '-v', r'tests/test_valid_input.py'], shell = True)

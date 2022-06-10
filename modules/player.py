@@ -1,3 +1,4 @@
+from modules.not_valid_choice import NotValidChoice
 from modules.user import User
 from helpers.is_valid_input import is_valid_input
 from helpers.is_valid_point import is_valid_point
@@ -22,8 +23,8 @@ class Player(User):
     
     def player_guess_input(self):
         string = is_valid_input(pattern = r"^[g,l]{1,1}", label = 'Enter your choice: ')
-        if string == ValueError:
-            return ValueError
+        if string == NotValidChoice:
+            return NotValidChoice
         return 'greater' if string in ['G', 'g'] else 'less'
 
     @is_valid_point
@@ -36,6 +37,6 @@ class Player(User):
 
     def is_continue(self):
         text = is_valid_input(pattern = r"^[y,n]{1,1}", label = 'Continue to play[y/n]: ')
-        if text == ValueError:
-            return ValueError
+        if text == NotValidChoice:
+            return NotValidChoice
         return text in ['Y', 'y']

@@ -1,6 +1,5 @@
 TODO
-
-- test case coverage > 90%
+factory - design pattern
 
 ANSI escape code
 \033....

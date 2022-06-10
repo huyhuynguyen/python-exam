@@ -1,13 +1,13 @@
-from time import sleep
+import time
 import enums
 import modules
 import os
 import sys
 import time
-import subprocess
 from modules.deck import Deck
 from modules.house import House
 from modules.log_mod import MyLogger
+from modules.not_valid_choice import NotValidChoice
 from modules.player import Player
 from helpers.clear_screen import clear_screen as clscreen
 
@@ -58,7 +58,16 @@ class PlayingGuessGame:
             time.sleep(enums.TEXT_RUNNING)
 
         print("Start game")
-        sleep(enums.WAITING_NEXT_ROUND)
+        time.sleep(enums.WAITING_NEXT_ROUND)
+
+    def wait_next_round_when_lose(self):
+        # print 3 2 1 .... -> next round
+        for second in range(enums.NEXT_ROUND_TIME_LOSE):
+            print(f'Waiting ... {enums.NEXT_ROUND_TIME_LOSE-second}', end='\r') # cursor at start line
+            time.sleep(enums.WAITING_TIME_LOSE)
+        else:
+            sys.stdout.write("\033[K") # clear line
+            print('Next round')
 
     def stage1(self):
         self.player.spend_cost_each_round(self.point_cost_each_round)
@@ -96,7 +105,7 @@ class PlayingGuessGame:
                 print('Out of card!!!')
                 print('Start again')
                 self.deck = Deck()
-                sleep(enums.WAITING_NEXT_ROUND)
+                time.sleep(enums.WAITING_NEXT_ROUND)
                 continue
             
             self.stage1()
@@ -107,7 +116,7 @@ class PlayingGuessGame:
             print(game_question)
 
             guess_choice = self.stage2()
-            if guess_choice == ValueError:
+            if guess_choice == NotValidChoice:
                 self.end_game_when_type_wrong()
 
             is_player_choose_right = self.stage3(guess_choice)
@@ -115,23 +124,18 @@ class PlayingGuessGame:
             if (is_player_choose_right):
                 flag = self.player.is_continue()
 
+                if flag == NotValidChoice:
+                    self.end_game_when_type_wrong()
+
                 # decide continue or stop | point > target
                 if (not flag) \
                     or self.is_auto_break_game():
                     break
 
-                if flag == ValueError:
-                    self.end_game_when_type_wrong()
             else:
-                # print 3 2 1 .... -> next round
-                for second in range(3):
-                    print(f'Waiting ... {3-second}', end='\r') # cursor at start line
-                    sleep(enums.WAITING_TIME_LOSE)
-                else:
-                    sys.stdout.write("\033[K") # clear line
-                    print('Next round')
+                self.wait_next_round_when_lose()
 
-            sleep(enums.WAITING_NEXT_ROUND)
+            time.sleep(enums.WAITING_NEXT_ROUND)
         
         # clear screen
         clscreen()

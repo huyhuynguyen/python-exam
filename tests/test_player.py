@@ -2,6 +2,7 @@ from io import StringIO
 import sys
 import unittest
 from unittest.mock import PropertyMock, patch
+from modules.not_valid_choice import NotValidChoice
 import setup_path
 import subprocess
 from modules import Player
@@ -22,7 +23,7 @@ class TestPlayerGuess(unittest.TestCase):
         expected = 'less'
         self.assertEqual(res, expected)
 
-    @patch('modules.player.is_valid_input', return_value = ValueError)
+    @patch('modules.player.is_valid_input', return_value = NotValidChoice)
     def test_player_guess_input_falied(self, string_mock):
         res = self.player.player_guess_input()
         self.assertIs(res, string_mock.return_value)
@@ -37,7 +38,7 @@ class TestPlayerGuess(unittest.TestCase):
         res = self.player.is_continue()
         self.assertFalse(res)
 
-    @patch('modules.player.is_valid_input', return_value = ValueError)
+    @patch('modules.player.is_valid_input', return_value = NotValidChoice)
     def test_player_is_continue_falied(self, string_mock):
         res = self.player.is_continue()
         self.assertIs(res, string_mock.return_value)
