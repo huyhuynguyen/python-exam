@@ -2,8 +2,8 @@ from io import StringIO
 import sys
 import unittest
 from unittest.mock import PropertyMock, patch
-from modules.not_valid_choice import NotValidChoice
 import setup_path
+from modules.not_valid_choice import NotValidChoice
 import subprocess
 from modules import Player
 

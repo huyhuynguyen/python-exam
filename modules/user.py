@@ -1,7 +1,7 @@
-from abc import abstractclassmethod
+from abc import ABC, abstractmethod
 
 
-class User:
+class User(ABC):
     def __init__(self) -> None:
         self._card = {
             'card': None,
@@ -24,7 +24,7 @@ class User:
     def card_name(self):
         return self.card['card']
 
-    @abstractclassmethod
+    @abstractmethod
     def print_card(self):
         # implement in child class
         pass
