@@ -22,7 +22,7 @@ class Player(User):
         
     
     def player_guess_input(self):
-        string = is_valid_input(pattern = r"^[g,l]{1,1}", label = 'Enter your choice: ')
+        string = is_valid_input(pattern = r"^[g,l]{1}", label = 'Enter your choice: ')
         if string == NotValidChoice:
             return NotValidChoice
         return 'greater' if string in ['G', 'g'] else 'less'
@@ -36,7 +36,7 @@ class Player(User):
         self.point += point_win
 
     def is_continue(self):
-        text = is_valid_input(pattern = r"^[y,n]{1,1}", label = 'Continue to play[y/n]: ')
+        text = is_valid_input(pattern = r"^[y,n]{1}", label = 'Continue to play[y/n]: ')
         if text == NotValidChoice:
             return NotValidChoice
         return text in ['Y', 'y']

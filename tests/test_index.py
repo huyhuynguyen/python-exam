@@ -87,7 +87,7 @@ class TestPlayGame(unittest.TestCase):
     @patch('index.PlayingGuessGame.start_game_banner')
     @patch('index.MyLogger.print_log_to_file')
     def test_is_continue_called_when_guess_right(self, mock_print_file ,mock_start_banner, mock_guess_input):
-        with patch('index.PlayingGuessGame.is_guess_right', return_value = True) as mock_is_guess_right:
+        with patch('index.PlayingGuessGame.is_guess_right', return_value = True):
             with patch('index.Player.is_continue', return_value = False) as mock_is_continue:
                 self.play_game.start_game()
                 mock_is_continue.assert_called()
@@ -101,14 +101,13 @@ class TestPlayGame(unittest.TestCase):
     def test_deck_init_when_out_of_card(self, mock_sleep, mock_stage1, mock_end_game, mock_auto_break, mock_start_banner):
         with patch('index.Deck.is_out_of_card', return_value = True):
             with patch('index.Deck.__new__') as mock_init_deck:
-                with self.assertRaises(Exception) as context:
+                with self.assertRaises(Exception):
                     self.play_game.start_game()
                     mock_init_deck.assert_called_once()
 
     @patch('sys.stdout.write')
     @patch('helpers.clear_screen.clear_screen')
-    @patch('time.sleep', return_value = None)
-    def test_sleep_text_length_time(self, mock_sleep, mock_cls, mock_sys_write):
+    def test_sleep_text_length_time(self, mock_cls, mock_sys_write):
         with patch('index.time.sleep') as mock_sleep:
             self.play_game.start_game_banner()
             self.assertEqual(mock_sleep.call_count, len(index.start_banner) + 1)  

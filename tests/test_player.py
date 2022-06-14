@@ -45,10 +45,10 @@ class TestPlayerGuess(unittest.TestCase):
 
     @patch('modules.Player.card_name', new_callable = PropertyMock, return_value = 'abc')
     def test_player_print_card(self, card_name_mock):
-        capturedOutput = StringIO()
-        sys.stdout = capturedOutput
+        captured_output = StringIO()
+        sys.stdout = captured_output
         self.player.print_card()
-        self.assertEqual(capturedOutput.getvalue(), f"Player card: {card_name_mock.return_value}\n")
+        self.assertEqual(captured_output.getvalue(), f"Player card: {card_name_mock.return_value}\n")
 
 if __name__ == '__main__':
     subprocess.run(['pytest', '-v', r'tests/test_player.py'], shell = True)

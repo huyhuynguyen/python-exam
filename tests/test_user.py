@@ -5,7 +5,7 @@ from modules import User
 import subprocess
 
 class TestUser(unittest.TestCase):
-    @patch("modules.User.__abstractmethods__", set())
+    @patch("modules.User.__abstractmethods__", list())
     def test_get_card_order(self):
         card = {
             'card': 'a',

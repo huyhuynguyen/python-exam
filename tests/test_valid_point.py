@@ -1,3 +1,5 @@
+from io import StringIO
+import sys
 import unittest
 from unittest.mock import patch
 import subprocess
@@ -7,12 +9,14 @@ from helpers.is_valid_point import is_valid_point
 
 class TestValidPoint(unittest.TestCase):
     def test_valid_point_failed(self):
-        with self.assertRaises(Exception) as context:
-            @is_valid_point
-            def a(self, point = '2'):
-                return 1
-            a(self, point = '2')
-        self.assertIs(type(context.exception), ValueError)
+        captured_output = StringIO()
+        sys.stdout = captured_output
+        @is_valid_point
+        def a(self, point = '2'):
+            return 1
+        res = a(self, point = '2')
+        self.assertEqual(captured_output.getvalue(), "Not valid point\n")
+        self.assertIs(res, ValueError)
 
     def test_valid_point_success(self):
         @is_valid_point

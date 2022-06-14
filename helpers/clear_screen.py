@@ -7,5 +7,3 @@ def clear_screen():
         subprocess.run(command, check=True, shell = True)
     except subprocess.SubprocessError as e:
         print('Command not found')
-
-# a = clear_screen()

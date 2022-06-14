@@ -15,10 +15,10 @@ class TestClearScreen(unittest.TestCase):
 
     def test_is_clear_screen_failed_print(self):
         with patch('helpers.clear_screen.subprocess.run', side_effect = subprocess.SubprocessError):
-            capturedOutput = StringIO()
-            sys.stdout = capturedOutput
+            captured_output = StringIO()
+            sys.stdout = captured_output
             clscreen()
-            self.assertEqual(capturedOutput.getvalue(), "Command not found\n")
+            self.assertEqual(captured_output.getvalue(), "Command not found\n")
 
 
 if __name__ == '__main__':
