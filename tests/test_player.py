@@ -23,11 +23,6 @@ class TestPlayerGuess(unittest.TestCase):
         expected = 'less'
         self.assertEqual(res, expected)
 
-    @patch('modules.player.is_valid_input', return_value = NotValidChoice)
-    def test_player_guess_input_falied(self, string_mock):
-        res = self.player.player_guess_input()
-        self.assertIs(res, string_mock.return_value)
-
     @patch('builtins.input', return_value = 'Y')
     def test_player_continue_2(self, input):
         res = self.player.is_continue()
@@ -37,11 +32,6 @@ class TestPlayerGuess(unittest.TestCase):
     def test_player_stop_1(self, input):
         res = self.player.is_continue()
         self.assertFalse(res)
-
-    @patch('modules.player.is_valid_input', return_value = NotValidChoice)
-    def test_player_is_continue_falied(self, string_mock):
-        res = self.player.is_continue()
-        self.assertIs(res, string_mock.return_value)
 
     @patch('modules.Player.card_name', new_callable = PropertyMock, return_value = 'abc')
     def test_player_print_card(self, card_name_mock):

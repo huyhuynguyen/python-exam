@@ -1,13 +1,12 @@
 import time
 import enums
-import modules
-import os
 import sys
 import time
 from modules.deck import Deck
 from modules.house import House
 from modules.log_mod import MyLogger
 from modules.not_valid_choice import NotValidChoice
+from modules.not_valid_point import NotValidPoint
 from modules.player import Player
 from helpers.clear_screen import clear_screen as clscreen
 
@@ -39,8 +38,10 @@ class PlayingGuessGame:
         house_card_order = self.house.card_order
         player_card_order = self.player.card_order
 
-        return ((guessing == enums.GuessText.G.value and player_card_order > house_card_order) \
-                    or (guessing == enums.GuessText.L.value and player_card_order < house_card_order))
+        return ((guessing == enums.GuessText.G.value 
+                    and player_card_order > house_card_order) \
+                or (guessing == enums.GuessText.L.value 
+                    and player_card_order < house_card_order))
 
     def is_auto_break_game(self):
         return self.player.point not in \
@@ -78,8 +79,7 @@ class PlayingGuessGame:
 
     def stage2(self):
         guess_choice = self.player.player_guess_input()
-        if isinstance(guess_choice, str):
-            print(f'You guess your card is {guess_choice} than house')
+        print(f'You guess your card is {guess_choice} than house')
         return guess_choice
 
     def stage3(self, guess_choice):
@@ -117,16 +117,10 @@ class PlayingGuessGame:
                 print(game_question)
 
                 guess_choice = self.stage2()
-                # if guess_choice == NotValidChoice:
-                #     self.end_game_when_type_wrong()
-
                 is_player_choose_right = self.stage3(guess_choice)
                 self.player.print_card()
                 if (is_player_choose_right):
                     flag = self.player.is_continue()
-
-                    # if flag == NotValidChoice:
-                    #     self.end_game_when_type_wrong()
 
                     # decide continue or stop | point > target
                     if (not flag) \
@@ -139,24 +133,30 @@ class PlayingGuessGame:
                 time.sleep(enums.WAITING_NEXT_ROUND)
             except NotValidChoice as e:
                 print(e)
-                self.end_game_when_type_wrong()
+                self.end_game_when_exception(enums.OUTPUT_TRY_TIMES)
+            except NotValidPoint as e:
+                print(e)
+                self.end_game_when_exception('Something error')
         
         # clear screen
         clscreen()
+        # print('exit game')
         # End game
         self.end_game()
 
-    def end_game_when_type_wrong(self):
-        MyLogger().print_log_wrong_option_console(enums.OUTPUT_TRY_TIMES)
+    def end_game_when_exception(self, message):
+        MyLogger().print_log_wrong_option_console(message)
         self.end_game()
-        exit()
 
     def end_game(self):
         print('-------------------- End game --------------------')
         print(f'Player point: {self.player.point}')
         result = 'wins!!' if self.player.point >= self.point_target else 'loses'
         print(f'You {result}')
-        MyLogger().print_log_to_file(self.player.point, result, filename=logging_filename)
+        MyLogger().print_log_to_file(self.player.point, 
+                                        result, 
+                                        filename=logging_filename)
+        exit()
 
 
 if __name__ == '__main__':

@@ -10,10 +10,13 @@ class MyLogger(metaclass = Singleton):
     def __init__(self) -> None:
         self.logger = logging.getLogger('Player log')
         self.logger.setLevel(logging.DEBUG)
-        self.formatter = Formatter('%(asctime)s - %(levelname)s - [in %(pathname)s:%(lineno)d] %(message)s', datefmt="%Y/%m/%d %H:%M:%S")
+        self.formatter = Formatter('%(asctime)s - %(levelname)s - ' +
+                                    '[in %(pathname)s:%(lineno)d] %(message)s',
+                                    datefmt="%Y/%m/%d %H:%M:%S")
 
     def config_log_to_file(self, filename):
-        file_handler = FileHandler(filename=f'{log_file_path}/{filename}.log', delay=True)
+        file_handler = FileHandler(filename=f'{log_file_path}/{filename}.log', 
+                                    delay=True)
         file_handler.setLevel(logging.INFO)
         file_handler.setFormatter(self.formatter)
         self.logger.addHandler(file_handler)

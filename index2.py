@@ -16,6 +16,16 @@ import random
 import subprocess
 import sys
 import time
+from unittest.mock import MagicMock
+import pydealer
+
+# deck = pydealer.Deck(rebuild=True, re_shuffle=True)
+# deck.shuffle(times=3)
+# print(deck)
+# dealt_cards = deck.deal(2)
+# print('\n-------------\n')
+# print(dealt_cards)
+# print(len(deck))
 
 
 
@@ -30,21 +40,21 @@ import time
 
 # print("Start game")
 
-class MyClass:
-    __instance = None
+# class MyClass:
+#     __instance = None
 
-    def __new__(cls, *args, **kwds):
-        print('new')
-        if not cls.__instance:
-            cls.__instance = object.__new__(cls)
-        return cls.__instance
+#     def __new__(cls, *args, **kwds):
+#         print('new')
+#         if not cls.__instance:
+#             cls.__instance = object.__new__(cls)
+#         return cls.__instance
         
 
-    def __init__(self) -> None:
-        print('init')
-        pass
+#     def __init__(self) -> None:
+#         print('init')
+#         pass
 
-a = MyClass()
+# a = MyClass()
 # b = MyClass()
 # print(id(a))
 # print(id(b))
