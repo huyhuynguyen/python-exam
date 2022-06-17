@@ -97,45 +97,49 @@ class PlayingGuessGame:
         self.start_game_banner()
 
         while True:
-            # clear screen
-            clscreen()
+            try:
+                # clear screen
+                clscreen()
 
-            print('-------------------- Start new round --------------------')
-            if self.deck.is_out_of_card(): 
-                print('Out of card!!!')
-                print('Start again')
-                self.deck = Deck()
-                time.sleep(enums.WAITING_NEXT_ROUND)
-                continue
-            
-            self.stage1()
-            if self.is_auto_break_game():
-                break
-
-            # player choices
-            print(game_question)
-
-            guess_choice = self.stage2()
-            if guess_choice == NotValidChoice:
-                self.end_game_when_type_wrong()
-
-            is_player_choose_right = self.stage3(guess_choice)
-            self.player.print_card()
-            if (is_player_choose_right):
-                flag = self.player.is_continue()
-
-                if flag == NotValidChoice:
-                    self.end_game_when_type_wrong()
-
-                # decide continue or stop | point > target
-                if (not flag) \
-                    or self.is_auto_break_game():
+                print('-------------------- Start new round --------------------')
+                if self.deck.is_out_of_card(): 
+                    print('Out of card!!!')
+                    print('Start again')
+                    self.deck = Deck()
+                    time.sleep(enums.WAITING_NEXT_ROUND)
+                    continue
+                
+                self.stage1()
+                if self.is_auto_break_game():
                     break
 
-            else:
-                self.wait_next_round_when_lose()
+                # player choices
+                print(game_question)
 
-            time.sleep(enums.WAITING_NEXT_ROUND)
+                guess_choice = self.stage2()
+                # if guess_choice == NotValidChoice:
+                #     self.end_game_when_type_wrong()
+
+                is_player_choose_right = self.stage3(guess_choice)
+                self.player.print_card()
+                if (is_player_choose_right):
+                    flag = self.player.is_continue()
+
+                    # if flag == NotValidChoice:
+                    #     self.end_game_when_type_wrong()
+
+                    # decide continue or stop | point > target
+                    if (not flag) \
+                        or self.is_auto_break_game():
+                        break
+
+                else:
+                    self.wait_next_round_when_lose()
+
+                time.sleep(enums.WAITING_NEXT_ROUND)
+            except NotValidChoice as e:
+                print(e)
+                self.end_game_when_type_wrong()
         
         # clear screen
         clscreen()

@@ -19,11 +19,13 @@ class TestValidInput(unittest.TestCase):
     @patch('helpers.is_valid_input.re.compile')
     @patch('helpers.is_valid_input.re.fullmatch', return_value=False)
     def test_is_valid_return_exception(self, fullmatch_mock, compile_mock, string):
-        captured_output = StringIO()
-        sys.stdout = captured_output
-        res = is_valid_input('pattern', 'label')
-        self.assertIn("Invalid option\n", captured_output.getvalue())
-        self.assertIs(res, NotValidChoice)
+        # captured_output = StringIO()
+        # sys.stdout = captured_output
+        with self.assertRaises(NotValidChoice) as context:
+            is_valid_input('pattern', 'label')
+            self.assertIs(type(context.exception), NotValidChoice)
+        # self.assertIn("Invalid option\n", captured_output.getvalue())
+        # self.assertIs(res, NotValidChoice)
 
 if __name__ == '__main__':
     subprocess.run(['pytest', '-v', r'tests/test_valid_input.py'], shell = True)

@@ -97,8 +97,9 @@ class TestPlayGame(unittest.TestCase):
     @patch('index.PlayingGuessGame.is_auto_break_game', return_value = True)
     @patch('index.PlayingGuessGame.end_game')
     @patch('index.PlayingGuessGame.stage1')
-    @patch('index.time.sleep', side_effect = Exception)
+    @patch('index.time.sleep')
     def test_deck_init_when_out_of_card(self, mock_sleep, mock_stage1, mock_end_game, mock_auto_break, mock_start_banner):
+        mock_sleep.side_effect = ['abc', Exception]
         with patch('index.Deck.is_out_of_card', return_value = True):
             with patch('index.Deck.__new__') as mock_init_deck:
                 with self.assertRaises(Exception):

@@ -14,7 +14,8 @@ class TestClearScreen(unittest.TestCase):
             mock_object.assert_called_with(['cls'], check=True, shell=True)
 
     def test_is_clear_screen_failed_print(self):
-        with patch('helpers.clear_screen.subprocess.run', side_effect = subprocess.SubprocessError):
+        with patch('helpers.clear_screen.subprocess.run',
+                    side_effect = subprocess.SubprocessError):
             captured_output = StringIO()
             sys.stdout = captured_output
             clscreen()
