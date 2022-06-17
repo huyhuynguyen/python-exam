@@ -1,15 +1,19 @@
+import re
 import time
 import enums
-import modules
 import os
 import sys
 import time
 from modules.deck import Deck
+from modules.factory.poor_player_factory import PoorPlayerFactory
+from modules.factory.rich_player_factory import RichPlayerFactory
 from modules.house import House
 from modules.log_mod import MyLogger
 from modules.not_valid_choice import NotValidChoice
 from modules.player import Player
 from helpers.clear_screen import clear_screen as clscreen
+from helpers import is_valid_input
+from modules.player.player import Player
 
 
 start_banner = "Welcome to guessing game"
@@ -21,10 +25,10 @@ game_question = '''
             '''
 class PlayingGuessGame:
     def __init__(self) -> None:
-        self.player = Player()
+        self.player = None
         self.house = House()
         self.deck = Deck()
-        self.point_target = 100
+        self.point_target = 120
         self.point_cost_each_round = 10
         self.point_win = 20
         self.point_min_lose = 30
@@ -59,6 +63,26 @@ class PlayingGuessGame:
 
         print("Start game")
         time.sleep(enums.WAITING_NEXT_ROUND)
+
+    def choose_player_type(self):
+        while True:
+            print('-------------------- Choose player --------------------')
+            print('1. Poor player')
+            print('2. Rich player')
+            pattern = re.compile(r'^[12]')
+            text = is_valid_input.is_valid_input(pattern, label='Choose your player: ', ignore_case_flag=False)
+            if text == NotValidChoice:
+                continue
+            else:
+                # create player factory
+                if text == '1':
+                    factory = PoorPlayerFactory()
+                else:
+                    factory = RichPlayerFactory()
+
+                self.player: Player = factory.create_player()
+                if isinstance(self.player, (Player)):
+                    break
 
     def wait_next_round_when_lose(self):
         # print 3 2 1 .... -> next round
@@ -95,6 +119,9 @@ class PlayingGuessGame:
     def start_game(self):
         # Start game banner
         self.start_game_banner()
+
+        # Choose player type
+        self.choose_player_type()
 
         while True:
             # clear screen

@@ -13,6 +13,7 @@
 # my_logger.logger.critical('This is a critical log message.')
 
 import random
+import re
 import subprocess
 import sys
 import time
@@ -30,21 +31,28 @@ import time
 
 # print("Start game")
 
-class MyClass:
-    __instance = None
+# class MyClass:
+#     __instance = None
 
-    def __new__(cls, *args, **kwds):
-        print('new')
-        if not cls.__instance:
-            cls.__instance = object.__new__(cls)
-        return cls.__instance
+#     def __new__(cls, *args, **kwds):
+#         print('new')
+#         if not cls.__instance:
+#             cls.__instance = object.__new__(cls)
+#         return cls.__instance
         
 
-    def __init__(self) -> None:
-        print('init')
-        pass
+#     def __init__(self) -> None:
+#         print('init')
+#         pass
 
-a = MyClass()
+# a = MyClass()
 # b = MyClass()
 # print(id(a))
 # print(id(b))
+
+pattern = re.compile(r'secret')
+text = input('Enter secret word: ')
+if re.fullmatch(pattern, text):
+    print('Match')
+else:
+    print('No match')

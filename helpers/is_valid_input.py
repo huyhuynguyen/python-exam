@@ -14,9 +14,12 @@ import enums
 
 
 
-def is_valid_input(pattern, label):
+def is_valid_input(pattern, label, ignore_case_flag = True):
     count_input = 0
-    pattern = re.compile(pattern, re.IGNORECASE)
+    if ignore_case_flag:
+        pattern = re.compile(pattern, re.IGNORECASE)
+    else:
+        pattern = re.compile(pattern)
     while True:
         try:
             if count_input == enums.TRY_TIME:

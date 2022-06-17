@@ -1,0 +1,3 @@
+from modules.factory.player_factory import PlayerFactory
+from modules.factory.poor_player_factory import PoorPlayerFactory
+from modules.factory.rich_player_factory import RichPlayerFactory
