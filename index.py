@@ -140,7 +140,6 @@ class PlayingGuessGame:
         
         # clear screen
         clscreen()
-        # print('exit game')
         # End game
         self.end_game()
 
